@@ -6,21 +6,49 @@
 
 
 
+\## Стек технологий
+
+
+
+\- \*\*Java 17\*\*, \*\*Spring Boot 3\*\*
+
+\- \*\*Apache Kafka\*\* — асинхронный обмен сообщениями
+
+\- \*\*Docker\*\* / \*\*Docker Compose\*\*
+
+\- \*\*Lombok\*\*, \*\*Maven\*\*
+
+
+
 \## Сервисы
 
 
 
-\- \*\*order-service\*\* (порт 8080) — принимает POST-запросы на создание заказов и отправляет события в Kafka топик orders
+\### order-service (порт 8080)
 
-\- \*\*warehouse-service\*\* (порт 8081) — слушает топик orders и обрабатывает входящие заказы
-
-
-
-\## Стек
+Принимает POST-запросы на создание заказов и публикует события в Kafka топик `orders`.
 
 
 
-Java 17, Spring Boot 3, Apache Kafka, Docker, Maven, Lombok
+\### warehouse-service (порт 8081)
+
+Подписан на топик `orders` и обрабатывает входящие заказы.
+
+
+
+\## API
+
+
+
+\### Создать заказ
+
+
+
+| Метод | Эндпоинт | Описание |
+
+|-------|----------|----------|
+
+| POST | `/orders` | Создать заказ |
 
 
 
@@ -30,13 +58,15 @@ Java 17, Spring Boot 3, Apache Kafka, Docker, Maven, Lombok
 
 1\. Поднять Kafka и Kafdrop:
 
+```bash
+
 docker-compose up -d
 
-
+```
 
 2\. Запустить order-service и warehouse-service из IDE
 
 
 
-Kafdrop (мониторинг топиков) доступен на http://localhost:9000
+Kafdrop (мониторинг топиков) доступен на `http://localhost:9000`
 
